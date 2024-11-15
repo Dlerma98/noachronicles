@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('category_post', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade'); // Relación con posts
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Relación con categories
             $table->timestamps();
         });
     }
