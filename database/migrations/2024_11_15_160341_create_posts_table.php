@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id(); // Campo para el ID del post (autoincrementable)
-            $table->string('title'); // Título del post
-            $table->text('summary'); // Resumen del post
-            $table->longText('content'); // Contenido completo del post
-            $table->foreignId('author_id')->constrained('users'); // Referencia al autor (usualmente tabla 'users')
-            $table->integer('comment_count')->default(0); // Contador de comentarios
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft'); // Estado del post
-            $table->boolean('is_visible')->default(true); // Visibilidad del post (si es público)
-            $table->timestamps(); // Timestamps (created_at y updated_at)
+            $table->id();
+            $table->string('title');
+            $table->text('summary'); // Resumen
+            $table->longText('content'); // Contenido completo
+            $table->string('thumbnail'); // URL de miniatura
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Autor
+            $table->timestamps(); // Fechas de creación/actualización
         });
     }
 

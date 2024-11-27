@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->text('contenido');
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade'); // Subcomentarios
+            $table->longText('content'); // Contenido del comentario
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Autor
+            $table->foreignId('post_id')->constrained()->onDelete('cascade'); // Post relacionado
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade'); // Respuesta a otro comentario
             $table->timestamps();
         });
     }
